@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>JOUTFITJS</title>
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+        <script src="includes/js/jquery.min.js"></script>
+        <script src="includes/js/jquery-ui.min.js"></script>
+        <link href="includes/js/pretty/prettify.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="includes/js/pretty/prettify.js"></script>
+
+        <script src="joutfit.js"></script>
+        <link rel="stylesheet" href="assets/main.css">
+        <script>
+
+        joutfit.controllerURL = "includes/controller.php";
+
+        $(function() {
+            joutfit.get({page: "about"});
+
+
+            $( "#menubtn" ).click(function() {
+                $( "#nav" ).toggle( "slide", 80 );
+                $( "#shadow" ).fadeIn(80, 'swing');
+                $( "#menubtn" ).hide();
+            });
+            $( "#shadow" ).click(function() {
+                hidemnu();
+            });
+            
+            $( "#aboutbtn" ).click(function() {
+                joutfit.get({page: "about"}, hidemnu());
+                
+            });
+            $( "#examplesbtn" ).click(function() {
+                joutfit.get({page: "examples"}, function() {
+                    hidemnu();
+                    prettyPrint();
+                });
+                
+            });
+            $( "#downloadbtn" ).click(function() {
+                joutfit.get({page: "download"}, hidemnu());
+                
+            });
+            
+        });
+
+        function hidemnu() 
+        {
+            $( "#nav" ).toggle( "slide", 80 );
+            $( "#shadow" ).fadeOut(80, 'swing');
+            $( "#menubtn" ).fadeIn(80, 'swing');
+        }
+        </script>
+    </head>
+    <body>
+        <div id="topblock"></div>        
+        <div id="menubtn"></div>
+
+        <div id="wrap">
+            <div id="nav">
+                <dl>
+                    <dt id="aboutbtn">About</dt>
+                    <dt id="examplesbtn">Examples</dt>
+                    <dt id="downloadbtn">Download</dt>
+                </dl>
+            </div>
+            <div id="shadow"></div>
+            
+            <div id="header">
+                <div class="logo">JOUTFIT.JS</div>
+            </div>
+            <div class="content">
+                <div class="full">
+                    <p id="title" joutfit="title">
+                    </p>
+                    <hr>
+                    <p id="content" joutfit="content">
+                    </p>      
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
